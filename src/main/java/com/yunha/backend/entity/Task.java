@@ -38,4 +38,5 @@ public class Task {
     @JoinColumn(name = "task_category_code")
     @ManyToOne
     private Category taskCategory;
+
 }

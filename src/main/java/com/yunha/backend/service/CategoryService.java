@@ -23,9 +23,7 @@ public class CategoryService {
 
         List<Category> categoryList = categoryRepository.getPublicCategoryList(1L);
 
-        // 사용하지 않는 데이터 거르기
-
-
+        // 사용하지 않는 데이터 거르기 위함
         List<CategoryDTO> categoryDTOList = new ArrayList<>();
 
         // dto로 변환

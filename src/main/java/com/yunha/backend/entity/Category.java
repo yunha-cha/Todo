@@ -28,10 +28,8 @@ public class Category {
     @Column(name = "category_is_private")
     private boolean categoryIsPrivate;
 
+    public Category(Long categoryCode) {
+        this.categoryCode = categoryCode;
+    }
 
-    //?
-//    public boolean getCategoryIsPrivate() {
-//
-//        return this.categoryIsPrivate;
-//    }
 }

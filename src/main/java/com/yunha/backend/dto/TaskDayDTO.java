@@ -1,22 +1,17 @@
 package com.yunha.backend.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
-@NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-@ToString
-public class TaskDTO {
-
-    private Long taskCode;
+@Getter@Setter
+public class TaskDayDTO {
     private String taskContent;
     private LocalDate taskStartDate;
     private LocalDate taskEndDate;
     private boolean taskState;
-
-    private String taskUserName;
     private String taskCategoryName;
 }
