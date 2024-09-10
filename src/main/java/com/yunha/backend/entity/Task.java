@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 @Table(name = "task")
 public class Task {
@@ -38,5 +40,6 @@ public class Task {
     @JoinColumn(name = "task_category_code")
     @ManyToOne
     private Category taskCategory;
+    //엔티티를 따로 만들어서 만든 엔티티의 레포지토리가 필요해
 
 }

@@ -24,26 +24,29 @@ public class TaskService {
 
 
     @Transactional
-    public String createMyTask(TaskDTO newTaskDTO) {
-
+    public String createMyTask(TaskDTO newTaskDTO, Long userCode) {
         try{
+            Task task = taskRepository.findById(newTaskDTO.getTaskCode()).orElseThrow();
+            task.setTaskContent(newTaskDTO.getTaskContent());
+            task.setTaskStartDate(newTaskDTO.getTaskStartDate());
+            task.setTaskEndDate(newTaskDTO.getTaskEndDate());
+            taskRepository.save(task);
+            return "성공";
+
+        } catch (Exception e){
             Task newTask = new Task(
                     newTaskDTO.getTaskCode(),
                     newTaskDTO.getTaskContent(),
                     newTaskDTO.getTaskStartDate(),
                     newTaskDTO.getTaskEndDate(),
-                    false,       // newTaskDTO.isTaskState(),
-                    new User(1L),       //userCode 받기
-                    new Category(1L)    //categoryCode 받기
+                    false,
+                    new User(userCode),
+                    new Category(1L)
             );
 
             taskRepository.save(newTask);
-            return "할 일 등록 성공";
-
-        }catch (Exception e){
-            return "할 일 등록 실패";
+            return "할 일 성공";
         }
-
     }
 
 
@@ -98,6 +101,7 @@ public class TaskService {
         try{
             for(Task t : entity){
                 TaskDayDTO dto = new TaskDayDTO(
+                        t.getTaskCode(),
                         t.getTaskContent(),
                         t.getTaskStartDate(),
                         t.getTaskEndDate(),

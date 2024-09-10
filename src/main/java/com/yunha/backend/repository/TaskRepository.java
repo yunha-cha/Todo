@@ -18,4 +18,5 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     @Query(value = "SELECT * FROM task WHERE ?1 >= task_start_date AND ?1 <= task_end_date AND task_user_code = ?2", nativeQuery = true)
     List<Task> getTaskOfDay(LocalDate day, Long userCode);
+    boolean existsByTaskCode(Long taskCode);
 }

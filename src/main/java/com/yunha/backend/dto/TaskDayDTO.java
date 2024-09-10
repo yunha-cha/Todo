@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter@Setter
 public class TaskDayDTO {
+    private Long taskCode;
     private String taskContent;
     private LocalDate taskStartDate;
     private LocalDate taskEndDate;
