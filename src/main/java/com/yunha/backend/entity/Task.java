@@ -40,6 +40,5 @@ public class Task {
     @JoinColumn(name = "task_category_code")
     @ManyToOne
     private Category taskCategory;
-    //엔티티를 따로 만들어서 만든 엔티티의 레포지토리가 필요해
 
 }

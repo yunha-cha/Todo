@@ -28,9 +28,6 @@ public class TaskService {
         try{
             Task task = taskRepository.findById(newTaskDTO.getTaskCode()).orElseThrow();
             task.setTaskContent(newTaskDTO.getTaskContent());
-            task.setTaskStartDate(newTaskDTO.getTaskStartDate());
-            task.setTaskEndDate(newTaskDTO.getTaskEndDate());
-            task.setTaskState(false);
             taskRepository.save(task);
             return "성공";
 
