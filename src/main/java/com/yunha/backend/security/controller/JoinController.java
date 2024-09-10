@@ -26,7 +26,7 @@ public class JoinController {
         } catch (Exception e){
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body("회원가입에 실패했습니다. : "+e.getMessage());
+                    .body("회원 가입에 실패했습니다. : "+e.getMessage());
         }
 
     }

@@ -82,8 +82,8 @@ public class TaskService {
                         task.getTaskStartDate(),
                         task.getTaskEndDate(),
                         task.isTaskState(),
-                        task.getTaskUser().getUserId(), // 이게 필요한가?
-                        task.getTaskCategory().getCategoryName() // 둘다 필요없는거같은데
+                        task.getTaskUser().getUserId(),
+                        task.getTaskCategory().getCategoryName()
                 );
                 taskDTOList.add(taskDTO);
             }
