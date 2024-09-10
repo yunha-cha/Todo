@@ -30,6 +30,7 @@ public class TaskService {
             task.setTaskContent(newTaskDTO.getTaskContent());
             task.setTaskStartDate(newTaskDTO.getTaskStartDate());
             task.setTaskEndDate(newTaskDTO.getTaskEndDate());
+            task.setTaskState(false);
             taskRepository.save(task);
             return "성공";
 
