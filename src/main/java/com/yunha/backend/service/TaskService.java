@@ -84,7 +84,7 @@ public class TaskService {
                 );
                 taskDTOList.add(taskDTO);
             }
-
+            System.out.println(taskDTOList);
             return taskDTOList;
 
         }catch (Exception e){
@@ -108,6 +108,7 @@ public class TaskService {
                 );
                 dtos.add(dto);
             }
+            System.out.println("dtos = " + dtos);
             return dtos;
         } catch (Exception e){
             return null;

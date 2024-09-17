@@ -32,6 +32,7 @@ public class TaskController {
     @GetMapping("/tasks")
     public ResponseEntity<?> getMyTasks(@RequestParam LocalDate calendarDate, @AuthenticationPrincipal CustomUserDetails user){        // userCode 받아야함
 
+        System.out.println("user = " + user.getUserCode());
         try{
             System.out.println("calendarDate = " + calendarDate);
             List<TaskDTO> myTaskList = taskService.getMyTaskList(calendarDate, user.getUserCode());
