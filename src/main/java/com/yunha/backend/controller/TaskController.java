@@ -1,20 +1,14 @@
 package com.yunha.backend.controller;
 
 
-import com.yunha.backend.dto.ResponseDTO;
 import com.yunha.backend.dto.TaskDTO;
 import com.yunha.backend.dto.TaskDayDTO;
-import com.yunha.backend.entity.Category;
-import com.yunha.backend.entity.Task;
-import com.yunha.backend.repository.TaskRepository;
 import com.yunha.backend.security.dto.CustomUserDetails;
 import com.yunha.backend.service.TaskService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
-import java.util.List;
 
 
 @RestController
@@ -22,7 +16,6 @@ import java.util.List;
 public class TaskController {
 
     private final TaskService taskService;
-
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
@@ -30,16 +23,16 @@ public class TaskController {
 
     // task 할 일 리스트 보기
     @GetMapping("/tasks")
-    public ResponseEntity<?> getMyTasks(@RequestParam LocalDate calendarDate, @AuthenticationPrincipal CustomUserDetails user){        // userCode 받아야함
+    public ResponseEntity<?> getMyTasks(@RequestParam LocalDate calendarDate, @AuthenticationPrincipal CustomUserDetails user){
         try{
-
             return ResponseEntity.ok().body(taskService.getMyTaskList(calendarDate, user.getUserCode()));
-
         }catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 
     }
+
+
     @GetMapping("/tasks/day")
     public ResponseEntity<?> getTaskOfDay(@RequestParam LocalDate day, @AuthenticationPrincipal CustomUserDetails user){
         try{
@@ -50,22 +43,17 @@ public class TaskController {
     }
 
 
-
     @PostMapping("/tasks")
-    public ResponseEntity<String> createMyTask(@ModelAttribute TaskDTO newTaskDTO, @AuthenticationPrincipal CustomUserDetails user){
-
+    public ResponseEntity<String> createMyTask(@ModelAttribute TaskDayDTO newTaskDayDTO, @AuthenticationPrincipal CustomUserDetails user){
         try{
-//            String result = taskService.createMyTask(newTaskDTO, user.getUserCode());
-            return ResponseEntity.ok().body("임시");
+            return ResponseEntity.ok().body(taskService.createMyTask(newTaskDayDTO, user.getUserCode()));
 
         }catch (Exception e){
-            e.printStackTrace();
-            return ResponseEntity.badRequest().body("할 일 등록 실패");
+            return ResponseEntity.badRequest().body(e.getMessage());
 
         }
 
     }
-
 
 
     @PutMapping("/tasks")
@@ -75,13 +63,10 @@ public class TaskController {
     }
 
 
-
     @DeleteMapping("/tasks/{taskCode}")
     public ResponseEntity<?> removeMyTask(@PathVariable Long taskCode){
 
-        String result = taskService.removeMyTask(taskCode);
-        return ResponseEntity.ok().body(result);
-
+        return ResponseEntity.ok().body(taskService.removeMyTask(taskCode));
     }
 
 }
