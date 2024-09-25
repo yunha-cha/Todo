@@ -22,5 +22,4 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     @Query("SELECT new com.yunha.backend.dto.TaskDayDTO(t.taskCode, t.taskContent, t.taskStartDate, t.taskEndDate, t.taskState, t.taskCategory.categoryName) FROM Task t WHERE :day >= t.taskStartDate AND :day <= t.taskEndDate AND t.taskUser.userCode = :userCode")
     List<TaskDayDTO> getTaskOfDay(LocalDate day, Long userCode);
 
-    boolean existsByTaskCode(Long taskCode);
 }

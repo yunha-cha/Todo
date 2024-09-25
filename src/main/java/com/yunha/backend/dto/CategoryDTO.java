@@ -16,4 +16,17 @@ public class CategoryDTO {
     private String categoryUserId;
     private boolean categoryIsPrivate;
 
+
+    public CategoryDTO(Long categoryCode, String categoryName) {
+        this.categoryCode = categoryCode;
+        this.categoryName = categoryName;
+    }
+
+    public CategoryDTO(Long categoryCode, String categoryName, boolean categoryIsPrivate) {
+        this.categoryCode = categoryCode;
+        this.categoryName = categoryName;
+        this.categoryIsPrivate = categoryIsPrivate;
+    }
 }
+
+

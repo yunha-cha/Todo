@@ -28,7 +28,7 @@ public class TaskService {
     }
 
 
-    @Transactional
+//    @Transactional
     public String createMyTask(TaskDayDTO newTaskDayDTO, Long userCode) {
         try {       // 수정
             Task task = taskRepository.findById(newTaskDayDTO.getTaskCode()).orElseThrow();
@@ -44,9 +44,8 @@ public class TaskService {
                     newTaskDayDTO.getTaskEndDate(),
                     false,
                     new User(userCode),
-                    new Category(1L)
+                    new Category(newTaskDayDTO.getTaskCategoryName())
             );
-
             taskRepository.save(newTask);
             return "할 일 등록 성공";
         }
