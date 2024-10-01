@@ -35,4 +35,20 @@ public class JoinService {
             throw new Exception("회원가입 중 알 수 없는 에러가 발생했습니다. : "+e.getMessage());
         }
     }
+
+
+
+    public String sendSecNumber(String id, String email) {
+
+        try{
+            boolean res = userRepository.existsByUserIdAndUserEmail(id, email);
+            System.out.println("id와 email 검사: " + res);
+            return "성공";
+        } catch (Exception e){
+            return "실패";
+        }
+
+
+
+    }
 }

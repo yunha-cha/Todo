@@ -10,6 +10,8 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.QueryTimeoutException;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +30,7 @@ public class TaskService {
     }
 
 
-//    @Transactional
+    @Transactional
     public String createMyTask(TaskDayDTO newTaskDayDTO, Long userCode) {
         try {       // 수정
             Task task = taskRepository.findById(newTaskDayDTO.getTaskCode()).orElseThrow();
@@ -44,7 +46,7 @@ public class TaskService {
                     newTaskDayDTO.getTaskEndDate(),
                     false,
                     new User(userCode),
-                    new Category(newTaskDayDTO.getTaskCategoryName())
+                    new Category(newTaskDayDTO.getTaskCategoryCode())
             );
             taskRepository.save(newTask);
             return "할 일 등록 성공";
@@ -68,7 +70,7 @@ public class TaskService {
     }
 
 
-
+    // 년/월 데이터
     public List<TaskDTO> getMyTaskList(LocalDate calendarDate, Long userCode) {
 
         try {
@@ -86,9 +88,10 @@ public class TaskService {
         }
     }
 
-    public List<TaskDayDTO> getTaskOfDay(LocalDate day, Long userCode) {
+    // 일 데이터
+    public Page<Task> getTaskOfDay(Pageable pageable, LocalDate day, Long userCode) {
         try {
-            return taskRepository.getTaskOfDay(day, userCode);
+            return taskRepository.getTaskOfDay(pageable, day, userCode);
         } catch(EntityNotFoundException e){
             throw new EntityNotFoundException("특정 엔티티가 존재하지 않습니다.");
         } catch (NoResultException e) {

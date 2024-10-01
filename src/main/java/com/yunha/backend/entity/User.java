@@ -28,6 +28,9 @@ public class User {
     @Column(name = "user_role")
     private String userRole;
 
+    @Column(name = "user_email")
+    private String userEmail;
+
     public User(Long userCode) {
         this.userCode = userCode;
     }
